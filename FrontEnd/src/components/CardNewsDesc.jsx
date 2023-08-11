@@ -1,0 +1,149 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import formatDate from "../utils/formatDate";
+
+const CardNewsDesc = ({ type, data }) => {
+  return (
+    <div>
+      {
+        type == "5" ? (<Link to={`/detail`}
+          state={{ data: data }} onClick={() => { window.scrollTo(0, 0); if (location.href.includes('detail')) window.location.reload() }}><a href="">
+            <div className='flex flex-row'>
+              <div className="mr-2">
+                <img className="" src={data.image} alt="" />
+              </div>
+              <h3 className='text-base font-bold hover:text-blue-900'>{data.title}</h3>
+            </div>
+          </a></Link>) : (type == "4") ? (<Link to={`/detail`}
+            state={{ data: data }} onClick={() => { window.scrollTo(0, 0); if (location.href.includes('detail')) window.location.reload() }}><a href="">
+              <div className='flex flex-col'>
+                <div className="">
+                  <img className="" src={data.image} alt="" />
+                </div>
+                <h3 className='text-base font-bold hover:text-blue-900'>{data.title}</h3>
+              </div>
+            </a></Link>) : (type == "2") ? (<Link to={`/detail`}
+              state={{ data: data }} onClick={() => { window.scrollTo(0, 0); if (location.href.includes('detail')) window.location.reload() }}><a href="">
+                <div className='flex flex-col'>
+                  <div className="">
+                    <img className="" src={data.image} alt="" />
+                  </div>
+                  <h3 className='text-base font-bold hover:text-blue-900'>{data.title}</h3>
+                  <p>{data.summary}</p>
+                </div>
+              </a></Link>) : (type == '6') ? (<Link to={`/detail`}
+                state={{ data: data }} onClick={() => { window.scrollTo(0, 0); if (location.href.includes('detail')) window.location.reload() }}><a href="" className="">
+                  <div className="flex flex-row">
+                    <div className="mr-2">
+                      <img
+                        className=""
+                        src={data.image}
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold hover:text-blue-900">
+                        {data.title}
+                      </h3>
+                      <p className="font-semibold my-2">
+                        Học đường - <span className="text-primary font-semibold">{formatDate(data.checkedTime)}</span>
+                      </p>
+                      <p>
+                        {data.summary}
+                      </p>
+                    </div>
+                  </div>
+                </a></Link>) : (<Link to={`/detail`}
+                  state={{ data: data }} onClick={() => {  window.scrollTo(0, 0);if (location.href.includes('detail')) window.location.reload() }}><a href="">
+                    <div className='flex flex-col'>
+                      <div className="">
+                        <img className="" src={data.image} alt="" />
+                      </div>
+                      <h3 className='text-2xl font-bold hover:text-blue-900'>{data.title}</h3>
+                      <p>{data.summary}</p>
+                    </div>
+                  </a></Link>)
+      }
+    </div>
+
+
+    // type 1
+    // <a href="">
+    // <div className='flex flex-col'>
+    //   <div className="">
+    //     <img className="" src="https://kenh14cdn.com/zoom/500_314/203336854389633024/2023/7/12/photo1689130648658-1689130648745874182450.jpg" alt="" />
+    //   </div>
+    //   <h3 className='text-2xl font-bold hover:text-blue-900'>Giới trẻ xứ Trung tạo trào lưu ''chẳng giống ai'' khiếnj nhiều người ngán ngẩm</h3>
+    //   <p>Để không phải tuân theo luật giao thông, nhiều người trẻ đã mua xe lăn để di chuyển 'cho tiện'</p>
+    // </div>
+    // </a>
+
+    // type 2
+    // <a href="">
+    // <div className='flex flex-col'>
+    //   <div className="">
+    //     <img className="" src="https://kenh14cdn.com/zoom/500_314/203336854389633024/2023/7/12/photo1689130648658-1689130648745874182450.jpg" alt="" />
+    //   </div>
+    //   <h3 className='text-base font-bold hover:text-blue-900'>Giới trẻ xứ Trung tạo trào lưu ''chẳng giống ai'' khiến nhiều người ngán ngẩm</h3>
+    //   <p>Để không phải tuân theo luật giao thông, nhiều người trẻ đã mua xe lăn để di chuyển 'cho tiện'</p>
+    // </div>
+    // </a>
+
+    // type 3
+    // <a href="">
+    // <div className='flex flex-col'>
+    //   <div className="">
+    //     <img className="" src="https://kenh14cdn.com/zoom/500_314/203336854389633024/2023/7/12/photo1689130648658-1689130648745874182450.jpg" alt="" />
+    //   </div>
+    //   <h3 className='text-lg font-bold'>Giới trẻ xứ Trung tạo trào lưu ''chẳng giống ai'' khiến nhiều người ngán ngẩm</h3>
+    //   <p>20/01/2023 05:15:00</p>
+    // </div>
+    // type 4
+    // <a href="">
+    // <div className='flex flex-col'>
+    //   <div className="">
+    //     <img className="" src="https://kenh14cdn.com/zoom/500_314/203336854389633024/2023/7/12/photo1689130648658-1689130648745874182450.jpg" alt="" />
+    //   </div>
+    //   <h3 className='text-base font-bold hover:text-blue-900'>Giới trẻ xứ Trung tạo trào lưu ''chẳng giống ai'' khiến nhiều người ngán ngẩm</h3>
+    // </div>
+    // </a>
+
+    // type 5
+    // <a href="">
+    // <div className='flex flex-row'>
+    //   <div className="mr-2">
+    //     <img className="" src="https://kenh14cdn.com/zoom/500_314/203336854389633024/2023/7/12/photo1689130648658-1689130648745874182450.jpg" alt="" />
+    //   </div>
+    //   <h3 className='text-base font-bold hover:text-blue-900'>Giới trẻ xứ Trung tạo trào lưu ''chẳng giống ai'' khiến nhiều người ngán ngẩm</h3>
+    // </div>
+    // </a>
+
+    // type 6
+    // <a href="" className="">
+    // <div className="flex flex-row">
+    //   <div className="mr-2">
+    //     <img
+    //       className=""
+    //       src="https://kenh14cdn.com/zoom/500_314/203336854389633024/2023/7/12/photo1689130648658-1689130648745874182450.jpg"
+    //       alt=""
+    //     />
+    //   </div>
+    //   <div>
+    //     <h3 className="text-base font-bold hover:text-blue-900">
+    //       Giới trẻ xứ Trung tạo trào lưu ''chẳng giống ai'' khiến nhiều người
+    //       ngán ngẩm
+    //     </h3>
+    //     <p className="font-semibold my-2">
+    //       Học đường - <span className="text-primary font-semibold">20/11/2023</span>
+    //     </p>
+    //     <p>
+    //       Để không phải tuân theo luật giao thông, nhiều người trẻ đã mua xe lăn
+    //       để di chuyển 'cho tiện'
+    //     </p>
+    //   </div>
+    // </div>
+    // </a>
+  );
+};
+
+export default CardNewsDesc;
