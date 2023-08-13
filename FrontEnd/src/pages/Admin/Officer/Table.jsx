@@ -3,7 +3,7 @@ import { addEmployee, updateEmployee } from "../../../server/Api";
 import formatDate from "../../../utils/formatDate";
 import uploadImg from "../../../utils/uploadImage";
 
-const Table = ({ data }) => {
+const Table = ({ data, setData }) => {
   const [showModal, setShowModal] = useState(false);
   const [update, setUpdate] = useState(true);
   const [ID, setID] = useState(0);
@@ -35,9 +35,7 @@ const Table = ({ data }) => {
 
   const handleChange = async (e) => {
     setNewValue((pre) => ({ ...pre, [e.target.name]: e.target.value }));
-    setNewValue((pre) => ({ ...pre, ROLEID: parseInt(e.target.value) }));
     setUpdateValue((pre) => ({ ...pre, [e.target.name]: e.target.value }));
-    setUpdateValue((pre) => ({ ...pre, ROLEID: parseInt(e.target.value) }));
 
   };
   const handleImage = async (e) => {
@@ -56,6 +54,7 @@ const Table = ({ data }) => {
       .then((rs) => {
         if (rs.data.status) {
           alert(rs.data.message);
+          setData([...data, rs.data.data])
           setShowModal(false);
         } else alert(rs.data.message);
       })
@@ -66,11 +65,12 @@ const Table = ({ data }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log(updateValue)
+    // console.log(updateValue)
     updateEmployee(updateValue)
       .then((rs) => {
         if (rs.data.status) {
           alert(rs.data.message);
+          setData([...data, rs.data.data])
           setShowModal(false);
         } else alert(rs.data.message);
       })
@@ -173,7 +173,7 @@ const Table = ({ data }) => {
                     )}
                   </td>
                   <td class="whitespace-nowrap px-4 py-4 font-normal">
-                    {item.startWorkingDate}
+                    {formatDate(item.startWorkingDate)}
                   </td>
 
                   <td class="whitespace-nowrap px-4 py-4 ">
@@ -378,8 +378,8 @@ const Table = ({ data }) => {
                           className="w-full py-2 h-10 px-2 border rounded border-gray-300 outline-none"
                           onChange={handleChange}
                         >
-                          <option value={1}>Quản lý</option>
-                          <option value={2}>Nhân viên</option>
+                          <option value="1">Quản lý</option>
+                          <option value="2">Nhân viên</option>
                         </select>
                       </div>
                       <div className="mb-6">

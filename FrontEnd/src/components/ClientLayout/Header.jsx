@@ -38,13 +38,13 @@ const Header = () => {
     PASSWORD: "",
   });
   const [updateValue, setUpdateValue] = useState({
-    NAME: "",
+    NAME: JSON.parse(localStorage.getItem('user')).name,
     ID: JSON.parse(localStorage.getItem('user')).userId ? JSON.parse(localStorage.getItem('user')).userId : null,
-    EMAIL: "",
-    ADDRESS: "",
-    GENDER: 1,
-    IMAGE: "",
-    PHONE: "",
+    EMAIL: JSON.parse(localStorage.getItem('user')).email,
+    ADDRESS: JSON.parse(localStorage.getItem('user')).address,
+    GENDER: JSON.parse(localStorage.getItem('user')).gender,
+    IMAGE: JSON.parse(localStorage.getItem('user')).image,
+    PHONE: JSON.parse(localStorage.getItem('user')).phone,
   });
   const [updatePass, setUpdatePass] = useState({
     EMAIL: JSON.parse(localStorage.getItem('user')).email ? JSON.parse(localStorage.getItem('user')).email : null,
@@ -199,7 +199,6 @@ const Header = () => {
             if (rs.data.data[0].role[index].roleId == role) {
               localStorage.setItem('Auth', true)
               localStorage.setItem('Authorization', rs.headers.authorization)
-              console.log( rs.headers.authorization)
               localStorage.setItem('user', JSON.stringify(rs.data.data[0]))
               localStorage.setItem('role', JSON.stringify([{ roleId: rs.data.data[0].role[index].roleId, name: rs.data.data[0].role[index].name }]))
               alert(rs.data.message);
@@ -388,7 +387,7 @@ const Header = () => {
                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:border-primary focus:shadow-outline border-collapse border-slate-300"
                           name="PASSWORD"
                           type="password"
-                          placeholder="Số điện thoại"
+                          placeholder="Mật khẩu"
                           value={registerValue.PASSWORD}
                           onChange={handleChange}
                         />
@@ -406,7 +405,7 @@ const Header = () => {
                           className="w-full py-2 h-10 px-2 border rounded border-gray-300 outline-none"
                           onChange={(e) => setAuthor((pre) => ({ ...pre, AUTHOR: e.target.value }))}
                         >
-                          <option value="1">Nhà báo</option>
+                          <option value="1">Tác giả</option>
                           <option value="0">Độc giả</option>
                         </select>
                       </div></div>
@@ -571,9 +570,11 @@ const Header = () => {
 
                     <div class="mb-4">
                       <a href="" className="text-primary cursor-pointer font-semibold hover:text-orange-700"
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.preventDefault()
                           // setShowModal(false)
                           setType(5);
+                          // setType(5);
                           // setShowModal(true) 
                         }}
                       >Quên mật khẩu?</a>

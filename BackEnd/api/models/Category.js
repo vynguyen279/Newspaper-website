@@ -9,6 +9,9 @@ class Category {
   static insert(params) {
     return DB.excute("SP_ADD_CATEGORY", params);
   }
+  static delete(params) {
+    return DB.excute("SP_DELETE_CATEGORY", params);
+  }
   static getList(params) {
     return DB.excute("SP_LIST_CATEGORY", params);
   }

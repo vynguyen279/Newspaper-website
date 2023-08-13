@@ -32,7 +32,7 @@ const NewsDetail = () => {
       // console.log(rs.data.data)
       if (rs.data.status) {
         setName((pre) => ({ ...pre, author: rs.data.data }));
-        // console.log(rs.data.data)
+        console.log(rs.data.data)
       }
     });
       findNameCategory({ID: state.data.categoryId}).then((rs) => {

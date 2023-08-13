@@ -17,7 +17,7 @@ const employeePath = [
   "/manage/category",
   "/manage/check",
 ];
-const authorPath = ["/article/new", "/manage/edit", "/manage/articleAU"];
+const authorPath = ["/article/new", "/manage/edit", "/manage/articleAU", "/manage/comment"];
 
 function checkRole(e) {
   // JSON.parse(localStorage.getItem('role'))[0].roleId

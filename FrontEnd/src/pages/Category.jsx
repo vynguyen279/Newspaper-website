@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ClientLayout from "../components/ClientLayout";
 import CardNewsDesc from "../components/CardNewsDesc";
-import OutstandingAuthors from "../components/OutstandingAuthors";
 import { listArticleModify } from "../server/Api";
 import { useLocation } from "react-router-dom";
 

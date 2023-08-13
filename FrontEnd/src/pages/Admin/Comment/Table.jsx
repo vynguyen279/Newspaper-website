@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import formatDate from "../../../utils/formatDate";
 import { checkComment, deleteComment } from "../../../server/Api";
 
-const Table = ({ data }) => {
+const Table = ({ data, setData }) => {
   const [showModal, setShowModal] = useState(false);
   const [lock, setLock] = useState("1");
   const [value2, setValue2] = useState({
@@ -15,11 +15,11 @@ const Table = ({ data }) => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log(value);
     checkComment(value)
       .then((rs) => {
         if (rs.data.status) {
           alert(rs.data.message);
+          setData([...data])
           setShowModal(false);
         } else alert(rs.data.message);
       })
@@ -29,11 +29,11 @@ const Table = ({ data }) => {
   };
   const handleDelete = (e) => {
     e.preventDefault();
-    // console.log(value);
     deleteComment(value2)
       .then((rs) => {
         if (rs.data.status) {
           alert(rs.data.message);
+          setData([...data])
           setShowModal(false);
         } else alert(rs.data.message);
       })
@@ -87,7 +87,7 @@ const Table = ({ data }) => {
                   <td class="whitespace-nowrap px-4 py-4 font-semibold text-primary">
                     {item.commentId}
                   </td>
-                  <td class="whitespace-wrap px-4 py-4">
+                  <td class="whitespace-wrap px-4 py-4 font-normal">
                     {item.content}
                   </td>
                   <td class="whitespace-wrap px-4 py-4 font-normal">

@@ -25,7 +25,7 @@ class CommentControllers {
   add = async (req, res) => {
     const { readerId, articleId, content, replyTo } = req.body;
     let params = [
-      { name: "content", type: "Nvarchar(250)", value: content },
+      { name: "content", type: "Nvarchar(1000)", value: content },
       { name: "readerId", type: "INT", value: readerId },
       { name: "articleId", type: "INT", value: articleId },
       { name: "status", type: "bit", value: false },
@@ -36,13 +36,12 @@ class CommentControllers {
         json(false, "Bình luận không được để trống!", "")
       );
     }
-    if (content.length > 250) {
+    if (content.length > 1000) {
       return res.send(
-        json(false, "Bình luận không được quá 250 ký tự!", "")
+        json(false, "Bình luận không được quá 1000 ký tự!", "")
       );
     }
     let rs = await Comment.add(params);
-    // console.log(rs)
     if (rs.rowsAffected[0] > 0) {
       res.send(json(true, "Thêm bình luận thành công. Bình luận của bạn sẽ được kiểm duyệt sau!", rs.recordset));
     } else {

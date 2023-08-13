@@ -17,7 +17,7 @@ class AuthorControllers {
     ];
 
     let rs = await User.listAuthor(params);
-    console.log(rs)
+    console.log(rs);
     if (rs.recordset.length == 0) {
       res.send(json(false, "Không tìm thấy dữ liệu phù hợp!", []));
       return;
@@ -50,39 +50,27 @@ class AuthorControllers {
       // { name: "STARTWORKINGDATE", type: "DATE", value: null },
     ];
     if (!NAME) {
-      return res.send(
-        json(false, "Họ tên không được để trống!", "")
-      );
+      return res.send(json(false, "Họ tên không được để trống!", ""));
     }
 
     if (!EMAIL) {
-      return res.send(
-        json(false, "Email không được để trống!", "")
-      );
+      return res.send(json(false, "Email không được để trống!", ""));
     }
 
     if (!EMAIL.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-      return res.send(
-        json(false, "Email không hợp lệ!", "")
-      );
+      return res.send(json(false, "Email không hợp lệ!", ""));
     }
 
     if (!IMAGE) {
-      return res.send(
-        json(false, "Bạn chưa chọn ảnh đại diện!", "")
-      );
+      return res.send(json(false, "Bạn chưa chọn ảnh đại diện!", ""));
     }
 
     if (!PHONE) {
-      return res.send(
-        json(false, "Số điện thoại không được để trống!", "")
-      );
+      return res.send(json(false, "Số điện thoại không được để trống!", ""));
     }
 
-    if (!PHONE.match(/^\d{10}$/)) {
-      return res.send(
-        json(false, "Số điện thoại không hợp lệ!", "")
-      );
+    if (!PHONE.match(/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/)) {
+      return res.send(json(false, "Số điện thoại không hợp lệ!", ""));
     }
     let rs = await User.update(params);
     if (rs.rowsAffected > 0) {
@@ -93,15 +81,7 @@ class AuthorControllers {
   };
 
   register = async (req, res) => {
-    let {
-      PASSWORD,
-      NAME,
-      EMAIL,
-      ADDRESS,
-      GENDER,
-      IMAGE,
-      PHONE,
-    } = req.body;
+    let { PASSWORD, NAME, EMAIL, ADDRESS, GENDER, IMAGE, PHONE } = req.body;
     let params = [
       { name: "ROLEID", type: "int", value: 3 },
       { name: "USERNAME", type: "Nvarchar(50)", value: EMAIL },
@@ -109,43 +89,35 @@ class AuthorControllers {
       { name: "CREATEDUSER", type: "Int", value: null },
     ];
     if (!NAME) {
-      return res.send(
-        json(false, "Họ tên không được để trống!", "")
-      );
+      return res.send(json(false, "Họ tên không được để trống!", ""));
     }
 
     if (!EMAIL) {
-      return res.send(
-        json(false, "Email không được để trống!", "")
-      );
+      return res.send(json(false, "Email không được để trống!", ""));
     }
 
     if (!EMAIL.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-      return res.send(
-        json(false, "Email không hợp lệ!", "")
-      );
+      return res.send(json(false, "Email không hợp lệ!", ""));
     }
 
     if (!IMAGE) {
-      return res.send(
-        json(false, "Bạn chưa chọn ảnh đại diện!", "")
-      );
+      return res.send(json(false, "Bạn chưa chọn ảnh đại diện!", ""));
     }
 
     if (!PHONE) {
-      return res.send(
-        json(false, "Số điện thoại không được để trống!", "")
-      );
+      return res.send(json(false, "Số điện thoại không được để trống!", ""));
     }
 
-    if (!PHONE.match(/^\d{10}$/)) {
-      return res.send(
-        json(false, "Số điện thoại không hợp lệ!", "")
-      );
+    if (!PHONE.match(/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/)) {
+      return res.send(json(false, "Số điện thoại không hợp lệ!", ""));
     }
-    if (PASSWORD.length > 15 ||PASSWORD.length < 8) {
+    if (PASSWORD.length > 15 || PASSWORD.length < 8) {
       return res.send(
-        json(false, "Mật khẩu phải có độ dài lớn hơn 8 ký tự và nhỏ hơn 15 ký tự!", "")
+        json(
+          false,
+          "Mật khẩu phải có độ dài lớn hơn 8 ký tự và nhỏ hơn 15 ký tự!",
+          ""
+        )
       );
     }
     let encryptedMATKHAU = await bcrypt.hash(PASSWORD, 10);
@@ -165,42 +137,31 @@ class AuthorControllers {
     let rs = await Role.getRoles(params3);
     if (rs.recordset.length > 0) {
       for (let i = 0; i < rs.recordset.length; i++) {
-        if (rs.recordset[i].name == "Tác giả") {
-          res.send(
-            json(
-              false,
-              "Địa chỉ email này đã được đăng ký!",
-              []
-            )
-          );
+        if (rs.recordset[i].roleId == 3) {
+          res.send(json(false, "Địa chỉ email này đã được đăng ký!", []));
           return;
         }
-        if (
-          rs.recordset[i].name != "Tác giả"
-        ) {
-          let insert = await User.addAccount(params);
-          if (insert.recordset.length > 0) {
-            res.send(
-              json(true, "Thêm tài khoản thành công!", insert.recordset)
-            );
-          } else {
-            res.send(json(false, "Thêm tài khoản thất bại!", []));
-          }
-        }
+      }
+      let insert = await User.addAccount(params);
+      if (insert.recordset.length > 0) {
+        res.send(json(true, "Thêm tài khoản thành công!", insert.recordset));
+      } else {
+        res.send(json(false, "Thêm tài khoản thất bại!", []));
       }
     } else {
       let rs = await User.insert(params2);
       if (rs.recordset.length > 0) {
         let insert = await User.addAccount(params);
         if (insert.recordset.length > 0) {
-          res.send(json(true, "Đăng ký tài khoản thành công!", insert.recordset));
+          res.send(
+            json(true, "Đăng ký tài khoản thành công!", insert.recordset)
+          );
         } else {
           res.send(json(false, "Đăng ký tài khoản thất bại!", []));
         }
       }
     }
   };
-
 }
 
 module.exports = new AuthorControllers();

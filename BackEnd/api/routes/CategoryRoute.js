@@ -5,6 +5,7 @@ const categoryController = require("../controllers/CategoryController");
 
 router.use("/list", categoryController.list);
 router.use("/update", authenticateToken, categoryController.update);
+router.use("/delete", authenticateToken, categoryController.delete);
 router.use("/add", authenticateToken, categoryController.add);
 router.use("/findName", categoryController.findName);
 

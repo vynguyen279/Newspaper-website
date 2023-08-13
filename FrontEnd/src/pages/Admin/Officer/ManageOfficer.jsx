@@ -21,7 +21,7 @@ const ManageOfficer = () => {
           setList(rs.data.data)
         }
       });
-  }, [key, status, gender]);
+  }, [key, status, gender, list]);
   return (
     <div>
       <ManagementLayout>
@@ -92,7 +92,7 @@ const ManageOfficer = () => {
               </div>
             </div>
             {/* TABLE */}
-            <Table data={list}/>
+            <Table data={list} setData={setList}/>
           </div>
         </div>
       </ManagementLayout>

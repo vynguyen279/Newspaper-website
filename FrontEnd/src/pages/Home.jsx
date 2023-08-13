@@ -46,12 +46,12 @@ const Home = () => {
             <div className=" ">
               {/* TOP */}
               <div>
-                <div className="flex justify-between">
-                  <div className="row-span-1 mb-10 col-span-2">
+                <div className="flex ">
+                  <div className="mr-20 mb-10 ">
                     <CardNewsDesc data ={list[0]} type="1" />
                   </div>
-                  <div className="row-span-1 col-span-1">
-                    <CardNewsDesc data ={list[1]} type="4" />
+                  <div className="">
+                    <CardNewsDesc data ={list[1]} type="1" />
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-2">

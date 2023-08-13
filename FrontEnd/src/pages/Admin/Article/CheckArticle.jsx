@@ -25,7 +25,6 @@ const CheckArticle = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log(value)
     checkArticle(value)
       .then((rs) => {
         if (rs.data.status) {

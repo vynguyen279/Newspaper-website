@@ -13,7 +13,6 @@ const ManageArticlesForAuthor = () => {
     const [article, setArticle] = useState('');
 
     useEffect(() => {
-        console.log(status)
         let data = {
             ARTICLEID: article,
             STATUS: status,
@@ -25,14 +24,14 @@ const ManageArticlesForAuthor = () => {
                 setList(rs.data.data)
             }
         });
-    }, [category, status, article]);
+    }, [category, status, article, list]);
     
 
   
     useEffect(() => {
       let data = {
         KEY: "",
-        STATUS: "",
+        STATUS: "true",
       };
         listCategory(data).then((rs) => {
           if(rs.data.status){
@@ -114,7 +113,7 @@ const ManageArticlesForAuthor = () => {
                             </div>
                         </div>
                         {/* TABLE */}
-                        <TableForAuthor data={list} />
+                        <TableForAuthor data={list}/>
                     </div>
                 </div>
             </ManagementLayout>

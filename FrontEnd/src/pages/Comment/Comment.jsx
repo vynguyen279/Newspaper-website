@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 const Comment = () => {
     const [list, setList] = useState([])
     const { state } = useLocation();
+
     const [comment, setComment] = useState({
         readerId: JSON.parse(localStorage.getItem('user')).userId,
         articleId: state.data.articleId,
@@ -30,9 +31,9 @@ const Comment = () => {
         setComment((pre) => ({ ...pre, [e.target.name]: e.target.value }));
     };
 
-    const handleAdd = () => {
+    const handleAdd = (e) => {
         e.preventDefault();
-        // console.log(comment)
+        console.log(comment)
         if (localStorage.Auth) {
             addComment(comment)
                 .then((rs) => {
@@ -52,7 +53,6 @@ const Comment = () => {
 
     };
     return (
-
         <div>
             <h3 className='font-semibold text-2xl'>Bình luận</h3>
             <div>

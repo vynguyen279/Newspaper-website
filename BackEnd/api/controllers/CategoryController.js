@@ -72,12 +72,18 @@ class CategoryControllers {
     }
   };
 
-  // xoaAll = async (req, res) => {
-  //   const { MAKH } = req.body;
-  //   let params = [{ name: "MAKH", type: "Nchar(10)", value: MAKH }];
-  //   let rs = await GioHang.deleteAll(MAKH);
-  //   res.send(json(true, "Xóa hết thành công!"));
-  // };
+  delete = async (req, res) => {
+    const { ID } = req.body;
+    let params = [{ name: "ID", type: "INT", value: ID }];
+    let rs = await Category.delete(params);
+    if(rs.returnValue == 0){
+      res.send(json(false, "Chuyên mục đang được sử dụng không thể xóa!", ""));
+    }
+    else
+    res.send(json(true, "Xóa chuyên mục thành công!", ""));
+    console.log(rs)
+    // res.send(json(true, "Xóa hết thành công!"));
+  };
 }
 
 module.exports = new CategoryControllers();

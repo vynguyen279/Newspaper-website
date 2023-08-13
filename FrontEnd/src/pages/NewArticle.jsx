@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ManagementLayout from "../components/ManagementLayout";
 import TextEditor from "../components/TextEditor";
-import Dropdown from "../components/Dropdown";
 import checkRole from "../utils/checkRole";
 import ReactQuill from "react-quill";
 import uploadImg from "../utils/uploadImage";

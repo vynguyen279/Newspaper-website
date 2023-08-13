@@ -16,27 +16,23 @@ const ManageComment = () => {
       STATUS: status,
     };
     let data2 = {
-      KEY: localStorage.getItem('role')[0].userId,
+      KEY: JSON.parse(localStorage.getItem('user')).userId,
       STATUS: 1,
     };
     if(JSON.parse(localStorage.getItem('role'))[0].roleId===3){
-      console.log("data2: ",data2)
-      console.log(JSON.parse(localStorage.getItem('role'))[0].roleId)
       listComment(data2).then((rs) => {
         if(rs.data.status){
           setList(rs.data.data)
         }
       });
     } else{
-      console.log("data1: ",data1)
-      console.log(JSON.parse(localStorage.getItem('role'))[0].roleId)
       listComment(data1).then((rs) => {
         if(rs.data.status){
           setList(rs.data.data)
         }
       });
     }
-  }, [key, status]);
+  }, [key, status, list]);
   return (
     <div>
       <ManagementLayout>
@@ -95,7 +91,7 @@ const ManageComment = () => {
               {/* DATE */}
             </div>
             {/* TABLE */}
-            <Table data={list}/>
+            <Table data={list} setData={setList}/>
           </div>
         </div>
       </ManagementLayout>

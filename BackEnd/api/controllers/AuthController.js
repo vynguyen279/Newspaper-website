@@ -162,6 +162,7 @@ class AuthControllers {
 
       const listRole = await Role.getRoles(params);
       const token = getToken(username, listRole.recordset);
+      // console.log(token)
       res.setHeader("Authorization", token);
       res.setHeader("Access-Control-Expose-Headers", "*");
       return res.send(

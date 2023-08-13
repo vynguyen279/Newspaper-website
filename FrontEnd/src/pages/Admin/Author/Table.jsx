@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { lockAccount } from "../../../server/Api";
 import formatDate from "../../../utils/formatDate";
 
-const Table = ({data}) => {
+const Table = ({data, setData}) => {
   const [showModal, setShowModal] = useState(false);
   const [lock, setLock] = useState(false);
   const [value, setValue] = useState({
@@ -12,11 +12,11 @@ const Table = ({data}) => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log(value);
     lockAccount(value)
       .then((rs) => {
         if (rs.data.status) {
           alert(rs.data.message);
+          setData([...data])
           setShowModal(false);
         } else alert(rs.data.message);
       })

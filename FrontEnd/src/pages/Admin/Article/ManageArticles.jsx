@@ -15,7 +15,7 @@ const ManageArticles = () => {
   useEffect(() => {
     let data = {
       KEY: "",
-      STATUS: "",
+      STATUS: "true",
     };
       listCategory(data).then((rs) => {
         if(rs.data.status){

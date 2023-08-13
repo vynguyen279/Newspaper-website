@@ -62,6 +62,9 @@ export async function listCategory(data) {
 export async function addCategory(data) {
     return axios.post('/Category/add', data);
 }
+export async function deleteCategory(data) {
+    return axios.post('/Category/delete', data);
+}
 export async function addArticle(data) {
     return axios.post('/Article/add', data);
 }

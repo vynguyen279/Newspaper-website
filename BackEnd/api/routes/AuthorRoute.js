@@ -12,7 +12,7 @@ router.use("/lock", authenticateToken, readerController.changeStatus);
 router.use("/list", authenticateToken, authorControllers.list);
 router.use("/register", authorControllers.register);
 router.use("/update", checkRoleAuthor, authorControllers.update);
-router.use("/findName", checkRoleReader, authorControllers.findName);
+router.use("/findName", authorControllers.findName);
 router.use("/", authorControllers.index);
 
 module.exports = router;

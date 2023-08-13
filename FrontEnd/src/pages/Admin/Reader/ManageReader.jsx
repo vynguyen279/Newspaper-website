@@ -23,7 +23,7 @@ const ManageReader = () => {
           setList(rs.data.data)
         }
       });
-  }, [key, status]);
+  }, [key, status, list]);
   return (
 <div>
       <ManagementLayout>
@@ -100,7 +100,7 @@ const ManageReader = () => {
               </div>
             </div>
             {/* TABLE */}
-            <Table data={list}/>
+            <Table data={list} setData={setList}/>
           </div>
         </div>
       </ManagementLayout>

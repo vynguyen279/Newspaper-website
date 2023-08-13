@@ -6,8 +6,8 @@ module.exports = function getToken(email, role) {
   let minutes = 3600;
 
   const payload = {
-    email,
-    role,
+    email: email,
+    role: role,
     isa: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 60 * minutes,
   };
@@ -17,3 +17,19 @@ module.exports = function getToken(email, role) {
   return token;
 }
 
+// module.exports = function getRefeshToken(email, role = "customer") {
+//   let minutes = 4320;
+//   const refreshToken = jwt.sign(
+//     {
+//       email,
+//       role,
+//       isa: Math.floor(Date.now() / 1000),
+//       exp: Math.floor(Date.now() / 1000) + 60 * minutes,
+//     },
+//     process.env.JWT_SECRET
+//   );
+
+//   console.log("maked refesh token:", email, role, refreshToken);
+
+//   return refreshToken;
+// }

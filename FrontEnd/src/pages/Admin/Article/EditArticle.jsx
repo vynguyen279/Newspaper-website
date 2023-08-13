@@ -7,12 +7,14 @@ import { useLocation } from "react-router-dom";
 import EditorToolbar, { modules, formats } from "../../../components/EditorToolbar";
 import "react-quill/dist/quill.snow.css";
 import uploadImg from "../../../utils/uploadImage";
-import { checkArticle, listCategory, updateArticle } from "../../../server/Api";
+import { checkArticle, listCategory, updateArticle, findNameCategory } from "../../../server/Api";
 
 const EditArticle = () => {
     checkRole()
+
     const { state } = useLocation();
     const [list, setList] = useState([]);
+    const [cate, setCate] = useState("");
     useEffect(() => {
         if (list.length == 0) {
             let data = {
@@ -25,6 +27,19 @@ const EditArticle = () => {
                 }
             });
         }
+
+        const cateId = {
+            ID: state.data.categoryId
+        }
+        findNameCategory(cateId)
+            .then((rs) => {
+                if (rs.data.status) {
+                    setCate(rs.data.data)
+                } 
+            })
+            .catch(function (error) {
+                alert(error);
+            });
 
     }, []);
     const [value, setValue] = useState({
@@ -167,7 +182,7 @@ const EditArticle = () => {
                                 <input className="w-full bg-blue-50 py-2 px-2 border-none"
                                     name="status"
                                     disabled
-                                    value={value.categoryId}
+                                    value={cate}
                                 />
                         </div>
                         <div className="my-2">
