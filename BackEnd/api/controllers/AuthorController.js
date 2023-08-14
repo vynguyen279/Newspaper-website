@@ -49,6 +49,7 @@ class AuthorControllers {
       // { name: "STATUS", type: "BIT", value: STATUS },
       // { name: "STARTWORKINGDATE", type: "DATE", value: null },
     ];
+    try{
     if (!NAME) {
       return res.send(json(false, "Họ tên không được để trống!", ""));
     }
@@ -78,6 +79,10 @@ class AuthorControllers {
     } else {
       res.send(json(false, "Cập thông tin cá nhân thất bại!", []));
     }
+  } catch (error) {
+    console.log(error);
+    return res.send(json(false, "Cập nhật thông tin thất bại!"));
+  }
   };
 
   register = async (req, res) => {
@@ -88,6 +93,7 @@ class AuthorControllers {
       { name: "PASSWORD", type: "Nvarchar(200)", value: PASSWORD },
       { name: "CREATEDUSER", type: "Int", value: null },
     ];
+    try{
     if (!NAME) {
       return res.send(json(false, "Họ tên không được để trống!", ""));
     }
@@ -161,6 +167,10 @@ class AuthorControllers {
         }
       }
     }
+  } catch (error) {
+    console.log(error);
+    return res.send(json(false, "Đăng ký tài khoản thất bại!"));
+  }
   };
 }
 

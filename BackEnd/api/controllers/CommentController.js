@@ -31,6 +31,7 @@ class CommentControllers {
       { name: "status", type: "bit", value: false },
       { name: "replyTo", type: "INT", value: replyTo },
     ];
+    try{
     if (!content) {
       return res.send(
         json(false, "Bình luận không được để trống!", "")
@@ -47,6 +48,10 @@ class CommentControllers {
     } else {
       res.send(json(false, "Thêm bình luận thất bại!", []));
     }
+  } catch (error) {
+    console.log(error);
+    return res.send(json(false, "Thêm bình luận thất bại!",''));
+  }
   };
 
   listByArticle = async (req, res) => {
@@ -63,6 +68,7 @@ class CommentControllers {
 
   changeStatus = async (req, res) => {
     const { ID, STATUS } = req.body;
+    try{
     let params = [
       { name: "ID", type: "int", value: ID },
       { name: "STATUS", type: "BIT", value: STATUS },
@@ -77,6 +83,10 @@ class CommentControllers {
     } else {
       res.send(json(false, "Duyệt bình luận thất bại!", []));
     }
+  } catch (error) {
+    console.log(error);
+    return res.send(json(false, "Duyệt bình luận thất bại!"));
+  }
   };
   delete = async (req, res) => {
     const { ID } = req.body;

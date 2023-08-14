@@ -44,6 +44,7 @@ class EmployeeControllers {
       { name: "PASSWORD", type: "Nvarchar(200)", value: PASSWORD },
       { name: "CREATEDUSER", type: "Int", value: CREATEDUSER },
     ];
+    try{
     let encryptedMATKHAU = await bcrypt.hash(PASSWORD, 10);
     params[2].value = encryptedMATKHAU;
     let params3 = [{ name: "EMAIL", type: "Nvarchar(50)", value: EMAIL }];
@@ -131,6 +132,10 @@ class EmployeeControllers {
         }
       }
     }
+  } catch (error) {
+    console.log(error);
+    return res.send(json(false, "Thêm nhân viên thất bại!"));
+  }
   };
 
   update = async (req, res) => {
@@ -158,7 +163,7 @@ class EmployeeControllers {
       { name: "STATUS", type: "BIT", value: STATUS },
       { name: "STARTWORKINGDATE", type: "DATE", value: STARTWORKINGDATE },
     ];
-
+try{
     if (!NAME) {
       return res.send(
         json(false, "Họ tên không được để trống!", "")
@@ -201,6 +206,10 @@ class EmployeeControllers {
     } else {
       res.send(json(false, "Cập thông tin cá nhân thất bại!", []));
     }
+  } catch (error) {
+    console.log(error);
+    return res.send(json(false, "Cập nhật thông tin thất bại!"));
+  }
   };
   updateProfile = async (req, res) => {
     const {
@@ -221,6 +230,7 @@ class EmployeeControllers {
       { name: "IMAGE", type: "Nchar(200)", value: IMAGE },
       { name: "PHONE", type: "Nchar(10)", value: PHONE },
     ];
+    try{
     if (!NAME) {
       return res.send(
         json(false, "Họ tên không được để trống!", "")
@@ -262,7 +272,12 @@ class EmployeeControllers {
     } else {
       res.send(json(false, "Cập thông tin cá nhân thất bại!", []));
     }
+  } catch (error) {
+    console.log(error);
+    return res.send(json(false, "cập nhật thông tin thất bại!"));
+  }
   };
+  
 }
 
 module.exports = new EmployeeControllers();

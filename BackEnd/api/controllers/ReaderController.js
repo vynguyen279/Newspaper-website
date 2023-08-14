@@ -62,6 +62,7 @@ class ReaderControllers {
 
   changeStatus = async (req, res) => {
     const { email, status } = req.body;
+    try {
     let params = [
       { name: "email", type: "Nvarchar(50)", value: email },
       { name: "status", type: "BIT", value: status },
@@ -74,6 +75,10 @@ class ReaderControllers {
     } else {
       res.send(json(false, "Cập thông tin cá nhân thất bại!", []));
     }
+  } catch (error) {
+    console.log(error);
+    return res.send(json(false, "Cập thông tin cá nhân thất bại!"));
+  }
   };
 
   list = async (req, res) => {
@@ -99,7 +104,7 @@ class ReaderControllers {
       { name: "PASSWORD", type: "Nvarchar(200)", value: PASSWORD },
       { name: "CREATEDUSER", type: "Int", value: null },
     ];
-
+     try {
     if (!PASSWORD) {
       return res.send(json(false, "Mật khẩu không được để trống!", ""));
     }
@@ -168,67 +173,11 @@ class ReaderControllers {
         }
       }
     }
+  } catch (error) {
+    console.log(error);
+    return res.send(json(false, "Đăng ký tài khoản thất bại!"));
+  }
   };
-
-  // themKh = async (req, res) => {
-  //   const { HOTEN, DIACHI, SDT, EMAIL, NGAYSINH, GIOITINH } = req.body;
-  //   let params = [
-  //     { name: "HOTEN", type: "Nvarchar(50)", value: HOTEN },
-  //     { name: "DIACHI", type: "Nvarchar(100)", value: DIACHI },
-  //     { name: "SDT", type: "Nchar(10)", value: SDT },
-  //     { name: "EMAIL", type: "Nchar(200)", value: EMAIL },
-  //     { name: "NGAYSINH", type: "Date", value: NGAYSINH },
-  //     { name: "GIOITINH", type: "Bit", value: GIOITINH },
-  //   ];
-  //   let rs = await KhachHang.insert(params);
-  //   if (rs.rowsAffected > 0) {
-  //     res.send(json(true, rs));
-  //   } else {
-  //     res.send(json(false, rs));
-  //   }
-  // };
-
-  // capNhatKh = async (req, res) => {
-  //   const { MAKH, HOTEN, DIACHI, SDT, EMAIL, NGAYSINH, GIOITINH } = req.body;
-  //   let params = [
-  //     { name: "MAKH", type: "Nchar(10)", value: MAKH },
-  //     { name: "HOTEN", type: "Nvarchar(50)", value: HOTEN },
-  //     { name: "DIACHI", type: "Nvarchar(100)", value: DIACHI },
-  //     { name: "SDT", type: "Nchar(10)", value: SDT },
-  //     { name: "EMAIL", type: "Nchar(200)", value: EMAIL },
-  //     { name: "NGAYSINH", type: "Date", value: NGAYSINH },
-  //     { name: "GIOITINH", type: "Bit", value: GIOITINH },
-  //   ];
-
-  //   let rs = await KhachHang.update(params);
-  //   if (rs.returnValue == 1) {
-  //     res.send(json(true, rs));
-  //   } else {
-  //     res.send(json(false, rs));
-  //   }
-  // };
-
-  // xoaKh = async (req, res) => {
-  //   const { MAKH } = req.body;
-  //   let params = [{ name: "MAKH", type: "Nchar(10)", value: MAKH }];
-  //   let rs = await KhachHang.delete(params);
-  //   if (rs.returnValue == 1) {
-  //     res.send(json(true, rs));
-  //   } else {
-  //     res.send(json(false, "Khách hàng đang có đơn không thể xóa!"));
-  //   }
-  // };
-
-  // timKiemKh = async (req, res) => {
-  //   const { KEY } = req.body;
-  //   let params = [{ name: "KEY", type: "nvarchar(50)", value: KEY }];
-  //   let rs = await KhachHang.search(params);
-  //   if (rs.recordset.length == 0) {
-  //     res.send(json(false, "Không có kết quả phù hợp"));
-  //     return;
-  //   }
-  //   res.send(json(true, rs));
-  // };
 }
 
 module.exports = new ReaderControllers();
