@@ -92,7 +92,6 @@ class AuthControllers {
     }
     let rs = await User.findPassword(EMAIL)
     const compare = await bcrypt.compare(PASSWORD.trim(), rs[0].password.trim());
-    console.log(compare)
     if(!compare){
       return res.send(
         json(false, "Mật khẩu cũ không chính xác!", "")

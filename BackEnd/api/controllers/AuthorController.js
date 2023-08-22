@@ -17,7 +17,6 @@ class AuthorControllers {
     ];
 
     let rs = await User.listAuthor(params);
-    console.log(rs);
     if (rs.recordset.length == 0) {
       res.send(json(false, "Không tìm thấy dữ liệu phù hợp!", []));
       return;

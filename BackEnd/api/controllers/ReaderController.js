@@ -48,7 +48,6 @@ class ReaderControllers {
         // { name: "STARTWORKINGDATE", type: "DATE", value: null },
       ];
       let rs = await User.update(params);
-      console.log(rs);
       if (rs.rowsAffected > 0) {
         res.send(json(true, "Cập thông tin cá nhân thành công!", rs.recordset));
       } else {

@@ -19,7 +19,6 @@ const ManageReader = () => {
     };
     listReader(data).then((rs) => {
         if(rs.data.status){
-          // console.log(rs.data.data)
           setList(rs.data.data)
         }
       });

@@ -17,6 +17,7 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.8.2",
     "react-toastify": "^9.1.1",
+    "toastify": "^2.0.1",
     "tw-elements-react": "^1.0.0-alpha1"
   },
   "devDependencies": {
